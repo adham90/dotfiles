@@ -1,5 +1,5 @@
-###dotfiles
+## dotfiles
 
-####screenshot
+### screenshot
 
-![Alt text](https://github.com/adham90/dotfiles/blob/master/screenshot.png?raw=true "screenshoot")
+![screenshot](https://raw.githubusercontent.com/adham90/dotfiles/master/screenshot.png "screenshot")
