@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/chain/fish_prompt.fish

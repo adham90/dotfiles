@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/rake-complete/completions/rake.fish

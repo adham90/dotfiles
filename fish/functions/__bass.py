@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/bass/functions/__bass.py

@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/done/conf.d/done.fish

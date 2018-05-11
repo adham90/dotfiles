@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/z/conf.d/z.fish

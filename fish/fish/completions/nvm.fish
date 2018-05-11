@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/nvm/completions/nvm.fish

@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/rvm/functions/rvm.fish

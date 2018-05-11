@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/getopts/getopts.fish

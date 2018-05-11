@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/rake-complete/functions/zap_rake_cache.fish

@@ -1,0 +1,240 @@
+### var ###
+set $mod Mod4
+set $browser google-chrome-stable #qutebrowser #luakit #google-chrome-beta
+set $term alacritty #termite
+set $fm nautilus
+set $pic_folder /home/adham/pictures
+set $left h
+set $right l
+set $down j
+set $up k
+
+# ws names
+set $ws1 1:>_
+set $ws2 2:WWW
+set $ws3 3:FILE
+set $ws4 4:MEDIA
+set $ws5 V
+set $ws6 VI
+set $ws7 VII
+set $ws8 VIII
+set $ws9 IX
+set $ws10 X
+############
+
+font pango:monospace 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+#### apps bind ####
+#
+# terminal
+bindsym $mod+Return exec $term #i3-sensible-terminal
+# browser
+bindsym $mod+b exec $browser
+# fm
+bindsym $mod+m exec $fm
+# start dmenu (a program launcher)
+bindsym $mod+p exec --no-startup-id dmenu_run
+# start clipmenu
+bindsym $mod+Insert exec clipmenu
+# kill focused window
+bindsym $mod+q kill
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+g split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+e layout toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+f fullscreen toggle
+bindsym $mod+x layout toggle all
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Screen Shots
+bindsym Print exec scrot -e 'mv $f $pic_folder/screenshot/$f'
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3;layout stacking
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# switch between the current and the previously focused one
+bindsym $mod+n workspace back_and_forth
+bindsym $mod+Shift+n move container to workspace back_and_forth
+
+#### audio keybinding ####
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master '2%+'"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master '2%-'"
+bindsym XF86AudioMute exec "amixer -D pulse set Master toggle"
+
+# screen brigtness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 8
+bindsym XF86MonBrightnessDown exec xbacklight -dec 8
+
+bindsym $mod+Shift+x exec ~/.config/i3/i3lock-fancy-multimonitor/lock
+bindsym $mod+F2 mode "$mode_system"
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# resize
+bindsym $mod+r mode "resize"
+
+# bindsym $mod+x exec autorandr -c
+bindsym $mod+bracketright move workspace to output up
+bindsym $mod+bracketleft move workspace to output left
+
+# floating term
+exec --no-startup-id termite --name=dropdown
+for_window [instance="dropdown"] floating enable;
+for_window [instance="dropdown"] move scratchpad; [instance="dropdown"] scratchpad show; move scratchpad
+bindsym $mod+u    [instance="dropdown"] scratchpad show
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+  # These bindings trigger as soon as you enter the resize mode
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
+  # same bindings, but for the arrow keys
+  bindsym Left resize shrink width 10 px or 10 ppt
+  bindsym Down resize grow height 10 px or 10 ppt
+  bindsym Up resize shrink height 10 px or 10 ppt
+  bindsym Right resize grow width 10 px or 10 ppt # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+# cause an error at startup
+# force_xinerama yes # The multi-monitor situation
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+  status_command i3blocks
+  font artwiz edges, FontAwesome 9.4
+  mode dock
+  position top
+  colors {
+    background  #212121
+    statusline  #DDDDDD
+    separator   #666666
+    focused_workspace  #000000 #3F4551 #ffffff
+    active_workspace   #212121 #212121 #FFFFFF
+    inactive_workspace #212121 #212121 #86888C
+    urgent_workspace   #2F343A #D64E4E #FFFFFF
+  }
+}
+
+# colors
+##class                  border   backgr.  text
+client.focused          #C9B5BD #3F4551 #FFFFFF
+client.focused_inactive #191919 #191919 #999999
+client.unfocused        #191919 #191919 #999999
+client.urgent           #cd989a #cd989a #2e3436
+client.background       #121212
+
+# Focus follows mouse
+focus_follows_mouse no
+
+# border settings
+for_window [class="^.*"] border pixel 1
+new_window 1pixel
+
+# logout bar
+set $Locker exec ~/.config/i3/i3lock-fancy-multimonitor/lock
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+  bindsym l exec --no-startup-id $Locker, mode "default"
+  bindsym e exec --no-startup-id i3-msg exit, mode "default"
+  bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+  bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+  bindsym r exec --no-startup-id systemctl reboot, mode "default"
+  bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+
+# auto start
+exec --no-startup-id /usr/bin/clipmenud
+exec --no-startup-id wicd-client --tray
+
+exec --no-startup-id i3-msg 'workspace $ws1; exec $term'
+exec --no-startup-id i3-msg 'workspace $ws3; exec $fm'
+exec --no-startup-id i3-msg 'workspace $ws2; exec $browser'
+
+# layouts
+# exec --no-startup-id i3-msg 'workspace 5; append_layout ~/.config/i3/layouts/ws3.json'
+
+# assgin to workspace
+assign [class="Google-chrome|Firefox"] $ws2
+assign [class="Nautilus"] $ws3
+assign [class="Gthumb|MPlayer|Xfburn|Pitivi|Gmusicbrowser|Ogmrip|Spotify"] $ws4
+assign [title="Popcorn Time"] $ws4
+
+# floating
+for_window [instance="vokoscreen"] floating enable;
+for_window [class="Lxappearance"] floating enable
+for_window [class="randr"] floating enable

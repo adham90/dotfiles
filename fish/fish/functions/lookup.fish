@@ -1,0 +1,1 @@
+/home/adham/.config/fisherman/lookup/functions/lookup.fish
